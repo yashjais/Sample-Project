@@ -1,13 +1,14 @@
 const express = require('express');
+const router = require('./config/routes');
+const setUpDb = require('./config/database')
+require('dotenv').config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
-const router = require('./config/routes');
+setUpDb();
 
-// app.get('/', (req, res) => {
-//     res.send('hello world!')
-// });
+app.use(express.json())
 app.use('/', router);
 
 app.listen(port, () => {
